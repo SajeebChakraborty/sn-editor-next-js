@@ -7,7 +7,7 @@ This guide covers the main buyer workflows for **SN Editor**.
 ## 1. Home / landing
 
 1. Start the app (`pnpm dev`).
-2. Open http://localhost:3000.
+2. Open http://localhost:3000 (or the live demo: https://sn-editor.sajeebit.com/).
 3. Log in or register (required for the editors).
 4. Use **Create** or go to **Image Editor** / **Video Editor**.
 

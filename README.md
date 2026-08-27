@@ -2,7 +2,16 @@
 
 **SN Editor** is a modern web-based **image + video design editor** built with Next.js, React, Konva, and TypeScript. Create social posts, ads, logos, and short-form videos from one product.
 
-> This folder is the **Codester distribution package**. Brand name: **SN Editor**.
+> This folder is the **Codester distribution package**. Brand name: **SN Editor**. Live demo: **https://sn-editor.sajeebit.com/**
+
+## Live demo
+
+**https://sn-editor.sajeebit.com/**
+
+| Role | Email | Password |
+|------|-------|----------|
+| User (premium) | `user@gmail.com` | `12345678` |
+| Admin | `admin@gmail.com` | `12345678` |
 
 ## Quick start
 

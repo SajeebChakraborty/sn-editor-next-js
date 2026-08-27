@@ -14,9 +14,14 @@ let seedPromise: Promise<void> | null = null;
 export async function ensureSeeded(): Promise<void> {
   if (seeded) return;
   if (!seedPromise) {
-    seedPromise = runSeed().finally(() => {
-      seeded = true;
-    });
+    seedPromise = runSeed()
+      .then(() => {
+        seeded = true;
+      })
+      .catch((err) => {
+        seedPromise = null;
+        throw err;
+      });
   }
   await seedPromise;
 }

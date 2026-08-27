@@ -1,15 +1,26 @@
 # Codester reviewer notes — SN Editor 1.0.0
 
-Please use these accounts after `pnpm install` and `pnpm dev`.
+Live demo (no install required): **https://sn-editor.sajeebit.com/**
 
-## Demo login
+Please test the live site first, then optionally run `pnpm install` and `pnpm dev` from the package.
+
+## Demo login (live + local)
 
 | Role | Email | Password | What to test |
 |------|-------|----------|----------------|
 | Premium user | user@gmail.com | 12345678 | Image + video editors, all premium tools unlocked |
 | Admin | admin@gmail.com | 12345678 | /admin — brand name/logo, password, Stripe keys, Stripe plans, users |
 
-## URLs
+## Live URLs
+
+- Home: https://sn-editor.sajeebit.com/
+- Login: https://sn-editor.sajeebit.com/login
+- Image editor: https://sn-editor.sajeebit.com/editor
+- Video editor: https://sn-editor.sajeebit.com/video
+- Pricing: https://sn-editor.sajeebit.com/pricing
+- Admin: https://sn-editor.sajeebit.com/admin
+
+## Local URLs (after pnpm dev)
 
 - Home: http://localhost:3000
 - Login: http://localhost:3000/login

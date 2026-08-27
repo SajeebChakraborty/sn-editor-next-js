@@ -19,14 +19,20 @@ import {
   type UserPlan,
 } from './types';
 
-function mongoEnabled(): boolean {
-  return Boolean(process.env.MONGODB_URI?.trim());
-}
+let mongoUnavailable = false;
 
-async function ensureMongo(): Promise<void> {
+async function tryMongo(): Promise<boolean> {
+  if (mongoUnavailable) return false;
   const uri = process.env.MONGODB_URI?.trim();
-  if (!uri) throw new Error('MONGODB_URI is not set');
-  await connectMongo(uri);
+  if (!uri) return false;
+  try {
+    await connectMongo(uri);
+    return true;
+  } catch (err) {
+    mongoUnavailable = true;
+    console.error('[sn-editor] MongoDB unavailable, using JSON file store', err);
+    return false;
+  }
 }
 
 function nowIso(): string {
@@ -80,8 +86,7 @@ function settingsFromMongo(doc: AppSettingsDocument): AppSettings {
 }
 
 export async function listUsers(): Promise<AccountUser[]> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const docs = await User.find().exec();
     return docs.map(userFromMongo);
   }
@@ -94,8 +99,7 @@ export async function listPublicUsers(): Promise<PublicUser[]> {
 }
 
 export async function findUserById(id: string): Promise<AccountUser | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.findById(id).exec();
     return doc ? userFromMongo(doc) : null;
   }
@@ -104,8 +108,7 @@ export async function findUserById(id: string): Promise<AccountUser | null> {
 
 export async function findUserByEmail(email: string): Promise<AccountUser | null> {
   const normalized = email.trim().toLowerCase();
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.findOne({ email: normalized }).exec();
     return doc ? userFromMongo(doc) : null;
   }
@@ -122,8 +125,7 @@ export async function createUser(input: {
 }): Promise<AccountUser> {
   const email = input.email.trim().toLowerCase();
   const now = nowIso();
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.create({
       email,
       name: input.name.trim() || 'User',
@@ -155,8 +157,7 @@ export async function updateUser(
   id: string,
   patch: Partial<Omit<AccountUser, 'id' | 'createdAt'>>,
 ): Promise<AccountUser | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.findByIdAndUpdate(id, patch, { new: true }).exec();
     return doc ? userFromMongo(doc) : null;
   }
@@ -172,8 +173,7 @@ export async function updateUser(
 }
 
 export async function listPlans(): Promise<BillingPlan[]> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const docs = await Plan.find().sort({ createdAt: -1 }).exec();
     return docs.map(planFromMongo);
   }
@@ -181,8 +181,7 @@ export async function listPlans(): Promise<BillingPlan[]> {
 }
 
 export async function findPlanById(id: string): Promise<BillingPlan | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await Plan.findById(id).exec();
     return doc ? planFromMongo(doc) : null;
   }
@@ -191,8 +190,7 @@ export async function findPlanById(id: string): Promise<BillingPlan | null> {
 
 export async function createPlan(input: Omit<BillingPlan, 'id' | 'createdAt' | 'updatedAt'>): Promise<BillingPlan> {
   const now = nowIso();
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await Plan.create(input);
     return planFromMongo(doc);
   }
@@ -207,8 +205,7 @@ export async function updatePlan(
   id: string,
   patch: Partial<Omit<BillingPlan, 'id' | 'createdAt'>>,
 ): Promise<BillingPlan | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await Plan.findByIdAndUpdate(id, patch, { new: true }).exec();
     return doc ? planFromMongo(doc) : null;
   }
@@ -224,8 +221,7 @@ export async function updatePlan(
 }
 
 export async function deletePlan(id: string): Promise<boolean> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const result = await Plan.findByIdAndDelete(id).exec();
     return result != null;
   }
@@ -239,8 +235,7 @@ export async function deletePlan(id: string): Promise<boolean> {
 }
 
 export async function getSettings(): Promise<AppSettings> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await AppSettingsModel.findOne().exec();
     return doc ? settingsFromMongo(doc) : { ...DEFAULT_SETTINGS };
   }
@@ -248,8 +243,7 @@ export async function getSettings(): Promise<AppSettings> {
 }
 
 export async function updateSettings(patch: Partial<AppSettings>): Promise<AppSettings> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const existing = await AppSettingsModel.findOne().exec();
     if (existing) {
       Object.assign(existing, patch);
@@ -268,8 +262,7 @@ export async function updateSettings(patch: Partial<AppSettings>): Promise<AppSe
 }
 
 export async function findUserByStripeCustomerId(customerId: string): Promise<AccountUser | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.findOne({ stripeCustomerId: customerId }).exec();
     return doc ? userFromMongo(doc) : null;
   }
@@ -277,8 +270,7 @@ export async function findUserByStripeCustomerId(customerId: string): Promise<Ac
 }
 
 export async function findUserByStripeSubscriptionId(subscriptionId: string): Promise<AccountUser | null> {
-  if (mongoEnabled()) {
-    await ensureMongo();
+  if (await tryMongo()) {
     const doc = await User.findOne({ stripeSubscriptionId: subscriptionId }).exec();
     return doc ? userFromMongo(doc) : null;
   }

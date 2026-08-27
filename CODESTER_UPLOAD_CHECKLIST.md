@@ -10,7 +10,7 @@ Codester staff make the final decision. This package is structured to match thei
 - [x] Documentation set: Installation, Usage, Support, Changelog, License, Reviewer notes
 - [x] Demo logins in README + Installation + REVIEWER.txt
 - [x] UI brand: **SN Editor** (admin can change name + logo at `/admin`)
-- [ ] Host a **live demo** URL (strongly recommended — missing demo is a common reject)
+- [x] Host a **live demo** URL: https://sn-editor.sajeebit.com/
 - [x] No private API keys in `.env.example` (do not ship `.env.local`)
 - [x] Preview, icon, and screenshots in `codester-assets/`
 
@@ -39,8 +39,8 @@ Must be **.zip** (not .rar). Documentation inside the main zip is mandatory.
 
 ## D. Listing fields
 
-- [ ] Paste text from `CODESTER_LISTING.txt`
-- [ ] **Live demo URL**
+- [x] Paste text from `CODESTER_LISTING.txt`
+- [x] **Live demo URL:** https://sn-editor.sajeebit.com/
 - [ ] Optional YouTube walkthrough
 - [ ] Complete Codester **seller profile** (photo + bio)
 

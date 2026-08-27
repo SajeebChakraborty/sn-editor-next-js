@@ -10,4 +10,5 @@
 - Canva-inspired UX: contextual toolbar, junction transitions, animate phases
 - Monorepo: `@sn-editor/*` packages + Next.js web app
 - Documentation set for Codester (Installation, Usage, Support)
+- Live demo: https://sn-editor.sajeebit.com/
 - Default product brand: **SN Editor**

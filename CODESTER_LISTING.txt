@@ -3,9 +3,14 @@ SN Editor — Online Image & Video Design Editor (Next.js Source Code)
 SHORT DESCRIPTION (paste in Codester short field):
 SN Editor is a Next.js image + video editor with login, admin Stripe plans, premium tools, layers, brand kit, timeline, transitions, animate, filters, and export.
 
+LIVE DEMO URL (paste in Codester demo field):
+https://sn-editor.sajeebit.com/
+
 FULL DESCRIPTION:
 
 SN Editor is a full-stack web editor for creating social graphics and short videos in the browser. Buyers receive complete source code with documentation.
+
+Live demo: https://sn-editor.sajeebit.com/
 
 Key features
 • Image editor with layers, text presets, shapes, brand kit, uploads, filters, and export (PNG / JPG / PDF)
@@ -17,9 +22,9 @@ Key features
 • Monorepo architecture (pnpm + Turborepo) — easy to extend
 • TypeScript + React + Next.js 15 + Konva
 
-Demo accounts (after pnpm dev)
+Demo accounts (live site and after pnpm dev)
 • User (all premium features): user@gmail.com / 12345678
-• Admin (Stripe plans + brand + password): admin@gmail.com / 12345678
+• Admin (brand, password, Stripe plans + keys): admin@gmail.com / 12345678
 
 Who is this for?
 • Agencies building a white-label design tool
@@ -49,7 +54,9 @@ Installation
 Documentation is included in the Documentation/ folder (Installation, Usage, Support, Changelog).
 
 Demo
-Add your live demo URL here before upload (strongly recommended by Codester).
+https://sn-editor.sajeebit.com/
+Login: user@gmail.com / 12345678
+Admin: admin@gmail.com / 12345678
 
 Support
 Contact the author via Codester messages. See Documentation/Support.md.

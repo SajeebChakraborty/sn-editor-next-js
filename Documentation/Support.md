@@ -15,6 +15,8 @@
 
 The admin panel can change brand name/logo, admin password, Stripe keys/plans, and user plans.
 
+Live demo: https://sn-editor.sajeebit.com/
+
 ## Support
 
 For buyers who purchased this item on Codester:
@@ -30,7 +32,7 @@ For buyers who purchased this item on Codester:
 Update these fields on your Codester seller profile (reviewers check this):
 
 - **Author / studio name:** SN Editor  
-- **Website:** (add your site)  
+- **Website:** https://sn-editor.sajeebit.com/  
 - **Email (support):** Use Codester messages  
 - **Codester profile:** Your seller profile URL  
 

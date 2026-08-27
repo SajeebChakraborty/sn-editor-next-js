@@ -17,8 +17,11 @@ export async function connectMongo(uri: string): Promise<typeof mongoose> {
     return mongoose;
   }
 
-  // STUB: phase-1 — retries/pooling tuned for Atlas later
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, {
+    serverSelectionTimeoutMS: 8000,
+    connectTimeoutMS: 8000,
+    socketTimeoutMS: 20000,
+  });
   connected = true;
   return mongoose;
 }

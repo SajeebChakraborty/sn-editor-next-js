@@ -24,16 +24,28 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, name }),
+        signal: AbortSignal.timeout(25_000),
       });
-      const data = (await res.json()) as { error?: string };
+      const raw = await res.text();
+      let data: { error?: string } = {};
+      try {
+        data = JSON.parse(raw) as { error?: string };
+      } catch {
+        data = {};
+      }
       if (!res.ok) {
-        setError(data.error || 'Something went wrong');
+        setError(data.error || `Could not sign in (HTTP ${res.status}).`);
         return;
       }
       router.replace(next.startsWith('/') ? next : '/editor');
       router.refresh();
-    } catch {
-      setError('Network error');
+    } catch (err) {
+      const name = err instanceof DOMException ? err.name : err instanceof Error ? err.name : '';
+      if (name === 'TimeoutError' || name === 'AbortError') {
+        setError('The server timed out. MongoDB may be blocked on this host — remove MONGODB_URI or allow Atlas access, then restart the app.');
+      } else {
+        setError('Network error. The login API did not respond.');
+      }
     } finally {
       setBusy(false);
     }

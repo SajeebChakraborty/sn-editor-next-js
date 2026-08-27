@@ -61,6 +61,8 @@ Then open:
 - Pricing: http://localhost:3000/pricing
 - Admin: http://localhost:3000/admin
 
+Live demo (hosted): https://sn-editor.sajeebit.com/
+
 ## 5. Production build
 
 ```bash
