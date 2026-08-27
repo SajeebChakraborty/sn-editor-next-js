@@ -1,0 +1,58 @@
+SN Editor — Online Image & Video Design Editor (Next.js Source Code)
+
+SHORT DESCRIPTION (paste in Codester short field):
+SN Editor is a Next.js image + video editor with login, admin Stripe plans, premium tools, layers, brand kit, timeline, transitions, animate, filters, and export.
+
+FULL DESCRIPTION:
+
+SN Editor is a full-stack web editor for creating social graphics and short videos in the browser. Buyers receive complete source code with documentation.
+
+Key features
+• Image editor with layers, text presets, shapes, brand kit, uploads, filters, and export (PNG / JPG / PDF)
+• Video editor with timeline, drag-and-drop clips, transitions, Animate presets, filters, audio, and export
+• Login and register — users are saved in MongoDB or a local JSON database
+• Admin panel — white-label brand name and logo, change admin password, add many Stripe plans, update Stripe keys, manage users
+• Premium subscriptions via Stripe Checkout (demo user already has all premium tools unlocked)
+• Clean light / dark UI with floating clip toolbar and circular play controls
+• Monorepo architecture (pnpm + Turborepo) — easy to extend
+• TypeScript + React + Next.js 15 + Konva
+
+Demo accounts (after pnpm dev)
+• User (all premium features): user@gmail.com / 12345678
+• Admin (Stripe plans + brand + password): admin@gmail.com / 12345678
+
+Who is this for?
+• Agencies building a white-label design tool
+• SaaS founders shipping a Canva-like editor with billing
+• Developers who need an image + video editor codebase to customize
+
+Tech stack
+• Next.js 15, React 19, TypeScript
+• Konva / react-konva (canvas)
+• Zustand state
+• Tailwind CSS
+• Stripe Billing (keys stored by admin)
+• Optional: MongoDB, Redis, AWS S3
+
+Requirements
+• Node.js 20+
+• pnpm 10+
+
+Installation
+1. Unzip the package
+2. Run: pnpm install
+3. Copy .env.example to .env.local
+4. Run: pnpm dev
+5. Open http://localhost:3000
+6. Log in with user@gmail.com / 12345678
+
+Documentation is included in the Documentation/ folder (Installation, Usage, Support, Changelog).
+
+Demo
+Add your live demo URL here before upload (strongly recommended by Codester).
+
+Support
+Contact the author via Codester messages. See Documentation/Support.md.
+
+Tags (suggestions):
+nextjs, react, typescript, video-editor, image-editor, design-tool, timeline, konva, stripe, saas, admin-panel, canva-alternative, monorepo

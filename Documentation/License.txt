@@ -1,0 +1,19 @@
+SN Editor — End User License (Codester distribution)
+
+IMPORTANT: When you upload to Codester, select the marketplace license type
+(Regular / Extended) that matches your listing. That Codester license governs
+what buyers may do with this source.
+
+This package is provided as source code for the SN Editor product.
+
+Buyer rights (typical Regular License — confirm on Codester):
+- Use on one end product
+- Modify the source for that end product
+- Not redistributed as competing source / template unless Extended terms allow
+
+Author remains free to sell the same item on Codester under the chosen license.
+
+Third-party libraries remain under their own licenses (MIT, Apache, etc.).
+See package.json files for dependency lists.
+
+Replace this file with your preferred license text if required by your counsel.

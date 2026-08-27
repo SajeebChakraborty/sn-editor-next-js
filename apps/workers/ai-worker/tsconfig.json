@@ -1,0 +1,8 @@
+{
+  "extends": "@sn-editor/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}

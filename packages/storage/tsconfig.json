@@ -1,0 +1,5 @@
+{
+  "extends": "@sn-editor/tsconfig/node.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "src", "moduleResolution": "Bundler", "module": "ESNext" },
+  "include": ["src"]
+}

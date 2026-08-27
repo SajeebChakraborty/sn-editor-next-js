@@ -1,0 +1,42 @@
+# Node 20 worker image template for Pixizen ECS tasks.
+# // STUB: phase-1 — build args / multi-stage tuned per worker (ffmpeg/sharp GPU later)
+#
+# Example:
+#   docker build -f infra/docker/Dockerfile.worker \
+#     --build-arg WORKER_PACKAGE=@pixizen/ai-worker \
+#     -t pixizen/ai-worker:local .
+
+ARG NODE_VERSION=20
+FROM node:${NODE_VERSION}-bookworm-slim AS base
+
+WORKDIR /app
+
+# pnpm via Corepack (matches root packageManager)
+RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
+
+# System deps for native addons; FFmpeg installed only when VIDEO_WORKER=1
+ARG INSTALL_FFMPEG=0
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates python3 make g++ \
+  && if [ "$INSTALL_FFMPEG" = "1" ]; then apt-get install -y --no-install-recommends ffmpeg; fi \
+  && rm -rf /var/lib/apt/lists/*
+
+FROM base AS deps
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY packages ./packages
+COPY apps/workers ./apps/workers
+
+# STUB: phase-1 — prefer frozen lockfile once lock is committed
+RUN pnpm install --frozen-lockfile || pnpm install
+
+ARG WORKER_PACKAGE=@pixizen/export-worker
+ENV WORKER_PACKAGE=${WORKER_PACKAGE}
+
+FROM deps AS runtime
+
+ENV NODE_ENV=production
+ENV REDIS_URL=redis://127.0.0.1:6379
+
+# Default entry: start the selected worker package
+CMD ["sh", "-c", "pnpm --filter ${WORKER_PACKAGE} start"]

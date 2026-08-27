@@ -1,0 +1,31 @@
+# Codester reviewer notes — SN Editor 1.0.0
+
+Please use these accounts after `pnpm install` and `pnpm dev`.
+
+## Demo login
+
+| Role | Email | Password | What to test |
+|------|-------|----------|----------------|
+| Premium user | user@gmail.com | 12345678 | Image + video editors, all premium tools unlocked |
+| Admin | admin@gmail.com | 12345678 | /admin — brand name/logo, password, Stripe keys, Stripe plans, users |
+
+## URLs
+
+- Home: http://localhost:3000
+- Login: http://localhost:3000/login
+- Image editor: http://localhost:3000/editor
+- Video editor: http://localhost:3000/video
+- Pricing: http://localhost:3000/pricing
+- Admin: http://localhost:3000/admin
+
+## Install (from package root)
+
+```
+pnpm install
+copy .env.example .env.local
+pnpm dev
+```
+
+Requires Node.js 20+ and pnpm 10+.
+
+Full steps: Documentation/Installation.md

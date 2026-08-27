@@ -1,0 +1,16 @@
+{
+  "name": "@sn-editor/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./preset": "./preset.ts"
+  },
+  "files": ["index.ts", "preset.ts"],
+  "devDependencies": {
+    "tailwindcss": "^4.0.14"
+  }
+}

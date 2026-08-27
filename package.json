@@ -1,0 +1,21 @@
+{
+  "name": "sn-editor",
+  "private": true,
+  "packageManager": "pnpm@10.4.1",
+  "scripts": {
+    "dev": "turbo run dev --filter=@sn-editor/web",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

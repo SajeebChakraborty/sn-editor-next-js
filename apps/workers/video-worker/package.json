@@ -1,0 +1,23 @@
+{
+  "name": "@sn-editor/video-worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"lint ok\"",
+    "test": "echo \"no tests\""
+  },
+  "dependencies": {
+    "@sn-editor/ai-contracts": "workspace:*",
+    "@sn-editor/queue": "workspace:*",
+    "@sn-editor/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@sn-editor/tsconfig": "workspace:*",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "@sn-editor/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,6 @@
+{
+  "extends": "@sn-editor/tsconfig/base.json",
+  "compilerOptions": { "noEmit": true, "lib": ["ES2022", "DOM"], "rootDir": "src" },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}
