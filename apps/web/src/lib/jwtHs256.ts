@@ -11,6 +11,11 @@ function b64urlToBytes(input: string): Uint8Array {
   return bytes;
 }
 
+/** TS 5.7+ types Uint8Array as ArrayBufferLike; WebCrypto wants ArrayBuffer. */
+function asBufferSource(bytes: Uint8Array): BufferSource {
+  return bytes as unknown as BufferSource;
+}
+
 function bytesToB64url(bytes: Uint8Array): string {
   let binary = '';
   for (const b of bytes) binary += String.fromCharCode(b);
@@ -34,7 +39,7 @@ export function authSecret(): string {
 async function hmacKey(secret: string, usage: KeyUsage[]): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
-    new TextEncoder().encode(secret),
+    asBufferSource(new TextEncoder().encode(secret)),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     usage,
@@ -51,7 +56,9 @@ export async function signHs256Jwt(
   const h = bytesToB64url(new TextEncoder().encode(JSON.stringify(header)));
   const p = bytesToB64url(new TextEncoder().encode(JSON.stringify(body)));
   const key = await hmacKey(authSecret(), ['sign']);
-  const sig = new Uint8Array(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${h}.${p}`)));
+  const sig = new Uint8Array(
+    await crypto.subtle.sign('HMAC', key, asBufferSource(new TextEncoder().encode(`${h}.${p}`))),
+  );
   return `${h}.${p}.${bytesToB64url(sig)}`;
 }
 
@@ -64,8 +71,8 @@ export async function verifyHs256Jwt(token: string, secret = authSecret()): Prom
     const ok = await crypto.subtle.verify(
       'HMAC',
       key,
-      b64urlToBytes(signature),
-      new TextEncoder().encode(`${header}.${payload}`),
+      asBufferSource(b64urlToBytes(signature)),
+      asBufferSource(new TextEncoder().encode(`${header}.${payload}`)),
     );
     if (!ok) return null;
     const json = JSON.parse(new TextDecoder().decode(b64urlToBytes(payload))) as JwtPayload;
