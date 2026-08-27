@@ -19,7 +19,7 @@ export async function middleware(req: NextRequest) {
   }
 
   const payload = await verifyHs256Jwt(token, authSecret());
-  if (!payload?.sub) {
+  if (!payload || typeof payload.sub !== 'string' || !payload.sub) {
     if (isApi) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

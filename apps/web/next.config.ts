@@ -44,6 +44,7 @@ const nextConfig: NextConfig = {
       'konva/lib/index-node.js': 'konva/lib/index.js',
       sharp: false,
       'onnxruntime-node': false,
+      aws4: false,
       'onnxruntime-web$': onnxRuntimeBrowser('dist/ort.wasm.bundle.min.mjs'),
       'onnxruntime-web/webgpu': onnxRuntimeBrowser('dist/ort.webgpu.bundle.min.mjs'),
     };

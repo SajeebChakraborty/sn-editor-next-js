@@ -41,8 +41,9 @@ export async function signSessionToken(user: AccountUser): Promise<string> {
 
 export async function verifySessionToken(token: string): Promise<SessionUser | null> {
   const payload = await verifyHs256Jwt(token);
-  const id = typeof payload?.sub === 'string' ? payload.sub : '';
-  const email = typeof payload?.email === 'string' ? payload.email : '';
+  if (!payload) return null;
+  const id = typeof payload.sub === 'string' ? payload.sub : '';
+  const email = typeof payload.email === 'string' ? payload.email : '';
   if (!id || !email) return null;
   return {
     id,

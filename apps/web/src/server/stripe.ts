@@ -9,6 +9,7 @@ import type { AppSettings, BillingPlan } from '@/server/account/types';
 export async function loadStripeSettings(): Promise<AppSettings> {
   const stored = await getSettings();
   return {
+    ...stored,
     stripePublishableKey:
       stored.stripePublishableKey.trim() || process.env.STRIPE_PUBLISHABLE_KEY?.trim() || '',
     stripeSecretKey: stored.stripeSecretKey.trim() || process.env.STRIPE_SECRET_KEY?.trim() || '',
