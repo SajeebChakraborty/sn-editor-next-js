@@ -35,8 +35,14 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['onnxruntime-web', '@imgly/background-removal', 'mongoose', 'stripe', 'bcryptjs'],
   experimental: {
     optimizePackageImports: ['@sn-editor/ui', '@sn-editor/shared'],
+    // Shared hosting (CloudLinux) kills extra Node forks with spawn EAGAIN.
+    cpus: 1,
+    workerThreads: false,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationMinPagesPerWorker: 50,
   },
   webpack: (config) => {
+    config.parallelism = 1;
     // Konva browser build — avoid Node canvas during SSR/bundling
     config.resolve.alias = {
       ...config.resolve.alias,
