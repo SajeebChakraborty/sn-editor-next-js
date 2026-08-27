@@ -36,5 +36,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'An account with this email already exists' }, { status: 409 });
   }
 
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = await createUser({ email, name, passwordHash });
+
   return attachSessionCookie(NextResponse.json({ user: toSessionUser(user) }, { status: 201 }), user);
 }
